@@ -1,6 +1,6 @@
 import { SITE, SHOPS, mapsUrl } from '../data.js';
 import { page, ICONS, esc } from '../layout.js';
-import { ticker, brandGrid, repairGrid, uspGrid, reviewsSection, faqSection, ctaBand, shopCard, stepsSection, linkCloud } from '../ui.js';
+import { brandGrid, repairGrid, uspGrid, reviewsSection, faqSection, ctaBand, shopCard, stepsSection, linkCloud } from '../ui.js';
 
 const words = (s) => s.split(' ').map(w => `<span class="w">${w}</span>`).join(' ');
 
@@ -67,7 +67,6 @@ export default function zonePage(z) {
   </div>
 </section>
 
-${ticker()}
 
 <section class="sec">
   <div class="wrap">

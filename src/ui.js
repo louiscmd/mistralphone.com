@@ -36,13 +36,6 @@ export const phoneVisual = () => `
   <div class="float-card fc-3">${ICONS.leaf}<div><b>−25 €</b><span>Bonus QualiRépar</span></div></div>
 </div>`;
 
-// ─── TICKER ───────────────────────────────────────────────────────
-export const ticker = () => {
-  const items = ['iPhone', 'Samsung Galaxy', 'Xiaomi · Redmi', 'Google Pixel', 'Huawei', 'Oppo', 'Honor', 'Motorola', 'iPad & tablettes', 'MacBook & PC portable', 'Écran cassé', 'Batterie', 'Désoxydation'];
-  const row = items.map(i => `<span class="ticker-i"><i></i>${esc(i)}</span>`).join('');
-  return `<div class="ticker" aria-hidden="true"><div class="ticker-track">${row}${row}</div></div>`;
-};
-
 // ─── GRILLE MARQUES ───────────────────────────────────────────────
 export const brandGrid = (activeId = null) => `
 <div class="grid g4" data-stagger="60">

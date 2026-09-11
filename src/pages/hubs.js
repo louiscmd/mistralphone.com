@@ -1,6 +1,6 @@
 import { SITE, BRANDS, REPAIRS, SHOPS, PRICING, PRICING_EXTRA, mapsUrl } from '../data.js';
 import { page, ICONS, esc } from '../layout.js';
-import { phoneVisual, ticker, brandGrid, repairGrid, uspGrid, shopsSection, stepsSection, reviewsSection, faqSection, ctaBand, linkCloud, statsRow, shopCard, symptomList } from '../ui.js';
+import { phoneVisual, brandGrid, repairGrid, uspGrid, shopsSection, stepsSection, reviewsSection, faqSection, ctaBand, linkCloud, statsRow, shopCard, symptomList } from '../ui.js';
 
 const words = (s) => s.split(' ').map(w => `<span class="w">${w}</span>`).join(' ');
 
@@ -45,7 +45,6 @@ ${hero({
     sub: `<strong>iPhone, Samsung, Xiaomi, Google Pixel</strong>, Huawei, Oppo, Honor, Motorola : nous réparons toutes les marques dans nos 3 boutiques marseillaises, le plus souvent le jour même.`,
     ctas: CTA_MAIN, trust: TRUST
   })}
-${ticker()}
 
 <section class="sec">
   <div class="wrap">
@@ -156,7 +155,6 @@ ${hero({
     sub: "Écran, batterie, connecteur de charge, vitre arrière, caméra, haut-parleur, désoxydation ou téléphone qui ne s'allume plus : chaque panne a sa page, ses symptômes et son délai.",
     ctas: CTA_MAIN, trust: TRUST
   })}
-${ticker()}
 <section class="sec">
   <div class="wrap">
     <div class="sec-head reveal"><span class="eyebrow">Toutes nos interventions</span><h2>Trouvez <span class="gr-or">votre panne</span></h2></div>
@@ -211,7 +209,6 @@ ${hero({
     sub: "Deux boutiques dans le 4e arrondissement, une dans le 12e à Saint-Barnabé. Toutes réparent l'ensemble des marques, avec les mêmes garanties et les mêmes délais.",
     ctas: CTA_MAIN, trust: TRUST, visual: false
   })}
-${ticker()}
 <section class="sec">
   <div class="wrap">
     <div class="grid g3" data-stagger="90">${SHOPS.map(shopCard).join('')}</div>

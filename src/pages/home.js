@@ -1,6 +1,6 @@
 import { SITE, BRANDS, REPAIRS } from '../data.js';
 import { page, ICONS } from '../layout.js';
-import { phoneVisual, ticker, brandGrid, repairGrid, uspGrid, shopsSection, stepsSection, statsRow, reviewsSection, faqSection, ctaBand, linkCloud } from '../ui.js';
+import { phoneVisual, brandGrid, repairGrid, uspGrid, shopsSection, stepsSection, statsRow, reviewsSection, faqSection, ctaBand, linkCloud } from '../ui.js';
 
 const words = (s) => s.split(' ').map(w => `<span class="w">${w}</span>`).join(' ');
 
@@ -46,7 +46,6 @@ const body = `
   </div>
 </section>
 
-${ticker()}
 
 <section class="sec">
   <div class="wrap">

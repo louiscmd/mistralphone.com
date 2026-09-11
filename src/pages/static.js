@@ -1,6 +1,6 @@
 import { SITE, SHOPS, BRANDS, REPAIRS, PRICING, PRICING_EXTRA, mapsUrl } from '../data.js';
 import { page, ICONS, esc } from '../layout.js';
-import { ticker, brandGrid, repairGrid, uspGrid, shopsSection, reviewsSection, faqSection, ctaBand, statsRow, linkCloud, stepsSection } from '../ui.js';
+import { brandGrid, repairGrid, uspGrid, shopsSection, reviewsSection, faqSection, ctaBand, statsRow, linkCloud, stepsSection } from '../ui.js';
 
 const words = (s) => s.split(' ').map(w => `<span class="w">${w}</span>`).join(' ');
 const heroSimple = ({ badges, h1a, h1b, sub, ctas }) => `
@@ -53,7 +53,6 @@ ${heroSimple({
     ctas: `<a class="btn btn-primary btn-lg magnetic" href="tel:${SITE.phoneHref}">${ICONS.phone}<span>Devis immédiat — ${SITE.phone}</span></a>
       <a class="btn btn-ghost btn-lg" href="/contact/">${ICONS.cal}<span>Réserver</span></a>`
   })}
-${ticker()}
 
 <section class="sec">
   <div class="wrap">
@@ -146,7 +145,6 @@ ${heroSimple({
     ctas: `<a class="btn btn-primary btn-lg magnetic" href="/boutiques/">${ICONS.pin}<span>Trouver ma boutique</span></a>
       <a class="btn btn-ghost btn-lg" href="tel:${SITE.phoneHref}">${ICONS.phone}<span>${SITE.phone}</span></a>`
   })}
-${ticker()}
 
 <section class="sec">
   <div class="wrap">

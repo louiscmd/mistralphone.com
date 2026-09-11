@@ -227,16 +227,6 @@ export function page({ path, title, description, body, crumbs = [], faq = null, 
 <div class="scroll-bar" id="scrollbar" aria-hidden="true"></div>
 <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
 
-<div class="topline">
-  <div class="wrap topline-in">
-    <span>${ICONS.bolt} iPhone réparé en 30 min · Autres marques en 1 h</span>
-    <span class="sep">·</span>
-    <span>${ICONS.leaf} Bonus QualiRépar jusqu'à 25 €</span>
-    <span class="sep">·</span>
-    <span>${ICONS.pin} 3 boutiques à Marseille — 13004 &amp; 13012</span>
-  </div>
-</div>
-
 <header class="head" id="head">
   <div class="wrap head-in">
     <a class="logo" href="/" aria-label="Mistral Phone — accueil">

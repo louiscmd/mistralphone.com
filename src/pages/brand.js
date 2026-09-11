@@ -1,6 +1,6 @@
 import { SITE, BRANDS, REPAIRS } from '../data.js';
 import { page, ICONS, esc } from '../layout.js';
-import { phoneVisual, ticker, brandGrid, repairGrid, uspGrid, shopsSection, stepsSection, reviewsSection, faqSection, ctaBand, statsRow } from '../ui.js';
+import { phoneVisual, brandGrid, repairGrid, uspGrid, shopsSection, stepsSection, reviewsSection, faqSection, ctaBand, statsRow } from '../ui.js';
 
 const words = (s) => s.split(' ').map(w => `<span class="w">${w}</span>`).join(' ');
 
@@ -39,7 +39,6 @@ export default function brandPage(b) {
   </div>
 </section>
 
-${ticker()}
 
 <section class="sec">
   <div class="wrap">

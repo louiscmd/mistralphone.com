@@ -1,6 +1,6 @@
 import { SITE, SHOPS, BRANDS, REPAIRS, mapsUrl } from '../data.js';
 import { page, ICONS, esc } from '../layout.js';
-import { ticker, brandGrid, repairGrid, uspGrid, stepsSection, reviewsSection, faqSection, ctaBand, shopCard, stars } from '../ui.js';
+import { brandGrid, repairGrid, uspGrid, stepsSection, reviewsSection, faqSection, ctaBand, shopCard, stars } from '../ui.js';
 
 const words = (s) => s.split(' ').map(w => `<span class="w">${w}</span>`).join(' ');
 
@@ -53,7 +53,6 @@ export default function shopPage(s) {
   </div>
 </section>
 
-${ticker()}
 
 <section class="sec">
   <div class="wrap">
