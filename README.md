@@ -1,7 +1,10 @@
 # Mistral Phone — V2 (mistralphone.com)
 
-Site statique généré, orienté SEO local Marseille. 30 pages, aucune dépendance
+Site statique généré, orienté SEO local Marseille. 31 pages, aucune dépendance
 d'exécution : le build produit du HTML/CSS/JS pur dans `dist/`.
+
+Thème clair « Méditerranée » (blanc brume, bleu marine, bleu mer, orange en
+touche), volontairement éloigné du V1 (fond pêche, orange dominant).
 
 ```bash
 npm run build     # génère dist/
@@ -34,6 +37,7 @@ Pour modifier un texte, une adresse, un tarif ou une note Google :
 | Pannes (8) | écran, batterie, connecteur de charge, vitre arrière, caméra, haut-parleur, désoxydation, ne s'allume plus |
 | Secteurs (2) | `/reparation-telephone-marseille-13004/`, `/reparation-telephone-marseille-13012/` |
 | Boutiques (4) | `/boutiques/` + une page par boutique |
+| Vente | `/acheter-telephone-marseille/` |
 | Divers | `/nos-reparations/`, `/tarifs/`, `/a-propos/`, `/contact/`, `/mentions-legales/`, `/plan-du-site/` |
 
 ## SEO
@@ -62,20 +66,33 @@ Le site n'a besoin d'aucun runtime : c'est du statique.
    pas les prix réels de Mistral Phone. À remplacer.
 3. **Mentions légales** — SIRET, forme juridique, TVA, directeur de publication
    et hébergeur sont marqués « À compléter » dans `src/pages/static.js`.
-4. **Avis clients** — les six témoignages de `REVIEWS` sont des exemples
+4. **Vente** — `BUY` dans `src/data.js` reprend ce qu'annonce
+   mistralphone.fr/produits.html (neufs ou d'occasion, débloqués tout opérateur,
+   iPhone 11 64 Go à 199 € garanti 6 mois). Mettre à jour `featured` avec le
+   stock réel ; les textes des catégories (tablettes, accessoires) sont à relire.
+5. **Avis clients** — les six témoignages de `REVIEWS` sont des exemples
    rédigés. À remplacer par de vrais avis Google (ou à supprimer).
-5. **Formulaire de contact** — il ouvre le client mail du visiteur (`mailto:`).
+6. **Formulaire de contact** — il ouvre le client mail du visiteur (`mailto:`).
    Pour recevoir les demandes directement, brancher un endpoint
    (Formspree, Vercel Function, etc.) dans le handler `#bookForm` de
    `public/assets/app.js`.
-6. **Redirections depuis mistralphone.fr** — prévoir des 301 vers les nouvelles
+7. **Redirections depuis mistralphone.fr** — prévoir des 301 vers les nouvelles
    URLs si le .fr est conservé.
 
 ## Animations
 
-Toutes désactivées sous `prefers-reduced-motion: reduce`.
+Toutes désactivées sous `prefers-reduced-motion: reduce`, et le site reste
+entièrement lisible sans JavaScript.
 
-- Canvas « vent mistral » dans les hero (mis en pause hors écran).
-- Écran qui se fissure puis se répare, en boucle, sur le téléphone du hero.
-- Révélations au défilement, compteurs animés, boutons magnétiques,
-  halo de curseur, inclinaison 3D du téléphone, bandeaux défilants.
+- **Accueil — l'histoire au défilement** (`storySection()` dans `src/ui.js`,
+  piloté par `app.js`) : la section reste épinglée pendant 3,6 écrans de
+  défilement. 01 Le dépôt : téléphone fissuré et ticket de dépôt.
+  02 L'atelier : vue éclatée 3D (vitre, écran, batterie, carte mère), la vitre
+  fissurée s'envole, la batterie se remplit. 03 La vitrine : le téléphone
+  réparé s'allume et deux téléphones en vente glissent sur l'étagère avec leur
+  prix. Les seuils de chaque étape sont dans `update()` de `app.js`.
+- **Pages intérieures** : bon de réparation animé (barre de progression,
+  étapes, tampon « Réparé & garanti »), en CSS pur.
+- **Page Acheter** : vitrine avec téléphone en rotation et pastille.
+- Traînées « vent mistral » en canvas dans les hero, révélations au
+  défilement, compteurs, boutons magnétiques.

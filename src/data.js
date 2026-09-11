@@ -85,7 +85,7 @@ export const mapsUrl = (s) => 'https://www.google.com/maps/search/?api=1&query='
 // ─── MARQUES ──────────────────────────────────────────────────────
 export const BRANDS = [
   {
-    id: 'iphone', label: 'iPhone', kw: 'iPhone', slug: 'reparation-iphone-marseille',
+    id: 'iphone', demo: 'iPhone 14 Pro', label: 'iPhone', kw: 'iPhone', slug: 'reparation-iphone-marseille',
     color: '#8E8E93', accent: '#A1A1AA', time: '30 minutes',
     logoWord: 'iPhone',
     models: ['iPhone 17 Pro Max','iPhone 17 Pro','iPhone 17','iPhone 16 Pro Max','iPhone 16 Pro','iPhone 16 / 16 Plus','iPhone 16e','iPhone 15 Pro Max','iPhone 15 Pro','iPhone 15 / 15 Plus','iPhone 14 Pro Max','iPhone 14 Pro','iPhone 14 / 14 Plus','iPhone 13 Pro Max','iPhone 13 Pro','iPhone 13 / 13 mini','iPhone 12 Pro Max','iPhone 12 Pro','iPhone 12 / 12 mini','iPhone 11 Pro Max','iPhone 11 Pro','iPhone 11','iPhone XS Max','iPhone XS','iPhone XR','iPhone X','iPhone SE 2020 / 2022 / 2023','iPhone 8 / 8 Plus'],
@@ -98,7 +98,7 @@ export const BRANDS = [
     ]
   },
   {
-    id: 'samsung', label: 'Samsung', kw: 'Samsung', slug: 'reparation-samsung-marseille',
+    id: 'samsung', demo: 'Galaxy S23', label: 'Samsung', kw: 'Samsung', slug: 'reparation-samsung-marseille',
     color: '#1428A0', accent: '#2F6BFF', time: '1 heure',
     models: ['Galaxy S25 Ultra / S25+ / S25','Galaxy S24 Ultra / S24+ / S24','Galaxy S23 Ultra / S23+ / S23','Galaxy S22 / S21 / S20','Galaxy Z Fold 6 / 5 / 4','Galaxy Z Flip 6 / 5 / 4','Galaxy Note 20 / 10','Galaxy A56 / A55 / A54 / A53','Galaxy A35 / A34 / A33','Galaxy A25 / A15 / A14','Galaxy M & Galaxy XCover'],
     intro: "Dalle AMOLED fissurée, batterie qui se vide en quelques heures, port USB-C qui ne charge plus : nous réparons tous les Samsung Galaxy à Marseille, des séries A aux flagships S Ultra et aux pliables Z Fold et Z Flip.",
@@ -109,7 +109,7 @@ export const BRANDS = [
     ]
   },
   {
-    id: 'xiaomi', label: 'Xiaomi', kw: 'Xiaomi', slug: 'reparation-xiaomi-marseille',
+    id: 'xiaomi', demo: 'Redmi Note 13', label: 'Xiaomi', kw: 'Xiaomi', slug: 'reparation-xiaomi-marseille',
     color: '#FF6900', accent: '#FF8A3D', time: '1 heure',
     models: ['Xiaomi 15 / 15 Pro / 15 Ultra','Xiaomi 14 / 14 Pro / 14 Ultra','Xiaomi 13 / 13 Pro / 13T','Redmi Note 14 / 14 Pro / 14 Pro+','Redmi Note 13 / 13 Pro / 13 Pro+','Redmi Note 12 / 11 / 10','Redmi 14C / 13C / 12C','POCO X7 / X6 / F6 / M6','Xiaomi Mi 11 / Mi 10 / Mi 9'],
     intro: "Xiaomi, Redmi et POCO : nous réparons toute la gamme à Marseille. Écran, batterie, connecteur de charge, caméra ou téléphone tombé dans l'eau, avec un devis gratuit avant toute intervention.",
@@ -119,7 +119,7 @@ export const BRANDS = [
     ]
   },
   {
-    id: 'google-pixel', label: 'Google Pixel', kw: 'Google Pixel', slug: 'reparation-google-pixel-marseille',
+    id: 'google-pixel', demo: 'Pixel 8', label: 'Google Pixel', kw: 'Google Pixel', slug: 'reparation-google-pixel-marseille',
     color: '#1A73E8', accent: '#4E9CFF', time: '1 heure',
     models: ['Pixel 9 Pro XL / 9 Pro / 9','Pixel 8 Pro / 8 / 8a','Pixel 7 Pro / 7 / 7a','Pixel 6 Pro / 6 / 6a','Pixel 5 / 4a / 4','Pixel Fold'],
     intro: "Peu de réparateurs à Marseille prennent en charge les Google Pixel. Nous, oui : écran OLED, batterie, connecteur USB-C, capteur photo et lecteur d'empreinte sous l'écran, sur toute la gamme Pixel.",
@@ -129,7 +129,7 @@ export const BRANDS = [
     ]
   },
   {
-    id: 'huawei', label: 'Huawei', kw: 'Huawei', slug: 'reparation-huawei-marseille',
+    id: 'huawei', demo: 'P30 Pro', label: 'Huawei', kw: 'Huawei', slug: 'reparation-huawei-marseille',
     color: '#CF0A2C', accent: '#FF3355', time: '1 heure',
     models: ['P60 Pro / P50 Pro / P40 Pro','P30 Pro / P30 / P30 Lite','P20 Pro / P20 / P20 Lite','Mate 60 / Mate 50 / Mate 40 / Mate 30','Mate 20 Pro / Mate 20 Lite','Nova 12 / 11 / 10 / 9','Y7 / Y6 / Y5 / P Smart'],
     intro: "Huawei P30, P40, Mate, Nova ou P Smart : nous conservons un stock de pièces Huawei à Marseille alors que la marque se fait rare. Écran, batterie, connecteur de charge et caméra réparés en boutique.",
@@ -138,7 +138,7 @@ export const BRANDS = [
     ]
   },
   {
-    id: 'oppo', label: 'Oppo', kw: 'Oppo', slug: 'reparation-oppo-marseille',
+    id: 'oppo', demo: 'Reno 8', label: 'Oppo', kw: 'Oppo', slug: 'reparation-oppo-marseille',
     color: '#046A38', accent: '#12A85E', time: '1 heure',
     models: ['Find X8 / X7 / X5 Pro','Reno 12 / 11 / 10 / 8 / 7','Reno 6 / 5 / 4','A98 / A78 / A57 / A54','A16 / A15 / A9','Oppo Find N (pliable)'],
     intro: "Oppo Reno, Find X ou série A : écran, batterie, connecteur de charge et caméra réparés dans nos boutiques marseillaises, avec devis gratuit et garantie.",
@@ -147,7 +147,7 @@ export const BRANDS = [
     ]
   },
   {
-    id: 'honor', label: 'Honor', kw: 'Honor', slug: 'reparation-honor-marseille',
+    id: 'honor', demo: 'Honor 90', label: 'Honor', kw: 'Honor', slug: 'reparation-honor-marseille',
     color: '#0A5FFF', accent: '#3D87FF', time: '1 heure',
     models: ['Magic 6 Pro / Magic 5 Pro','Honor 200 / 90 / 70 / 50','Honor X9 / X8 / X7 / X6','Honor 20 / 10 / 9','Honor Play & Magic V (pliable)'],
     intro: "Honor Magic, Honor 90, série X : nous réparons les smartphones Honor à Marseille, écran, batterie, connecteur de charge et caméra, avec un diagnostic gratuit en boutique.",
@@ -156,7 +156,7 @@ export const BRANDS = [
     ]
   },
   {
-    id: 'motorola', label: 'Motorola', kw: 'Motorola', slug: 'reparation-motorola-marseille',
+    id: 'motorola', demo: 'Moto G84', label: 'Motorola', kw: 'Motorola', slug: 'reparation-motorola-marseille',
     color: '#5C92FA', accent: '#89B4FF', time: '1 heure',
     models: ['Edge 50 Pro / Edge 40 / Edge 30','Moto G84 / G73 / G54 / G53','Moto G34 / G24 / G14','Razr 50 Ultra / Razr 40 (pliables)','Moto E13 / E22 / E32'],
     intro: "Motorola Edge, Moto G, Moto E et Razr pliable : réparation d'écran, de batterie et de connecteur de charge à Marseille, souvent le jour même.",
@@ -373,6 +373,22 @@ export const PRICING_EXTRA = [
   ['Micro-soudure carte mère', 'Sur devis', 'Après diagnostic en atelier']
 ];
 
+// ─── VENTE ────────────────────────────────────────────────────────
+// Source : mistralphone.fr/produits.html — « Smartphones, tablettes & accessoires.
+// Disponibles en boutique, neufs ou d'occasion. Tous débloqués tout opérateur. »
+// ⚠️ Mettre à jour `featured` avec le stock réel.
+export const BUY = {
+  intro: "Smartphones d'occasion et neufs, tablettes et accessoires : tout est disponible en boutique, et tous nos téléphones sont débloqués tout opérateur.",
+  featured: { name: 'iPhone 11', storage: '64 Go', state: 'Comme neuf', color: 'Noir', warranty: 'Garantie 6 mois', price: 199 },
+  categories: [
+    { icon: 'mobile', title: "Smartphones d'occasion", text: "Des téléphones contrôlés par un atelier de réparation, garantis, pour s'équiper sans payer le prix du neuf.", tag: 'Ex. iPhone 11 · 199 €' },
+    { icon: 'sparkle', title: 'Smartphones neufs', text: "Des modèles neufs débloqués tout opérateur, en boutique selon les arrivages ou sur demande.", tag: 'Sur demande' },
+    { icon: 'tablet', title: 'Tablettes', text: "iPad et tablettes Android, neufs ou d'occasion. Demandez les modèles disponibles en ce moment.", tag: 'Selon stock' },
+    { icon: 'plug', title: 'Accessoires', text: "Coques, protections d'écran, chargeurs et câbles, à poser sur place au moment de la réparation.", tag: 'En boutique' }
+  ],
+  promises: ['Tous débloqués tout opérateur', 'Garantie indiquée sur chaque appareil', 'Neufs ou d’occasion, au choix', 'Catalogue complet en boutique']
+};
+
 // ─── AVIS CLIENTS ─────────────────────────────────────────────────
 export const REVIEWS = [
   { name: 'Sarah B.', shop: 'Maréchal Foch', text: "Écran d'iPhone 13 changé en 25 minutes chrono pendant que je faisais mes courses. Prix annoncé = prix payé. Rien à dire.", stars: 5 },
@@ -399,6 +415,7 @@ export const NAV = [
   { label: 'Réparation', href: '/reparation-telephone-marseille/', children: BRANDS.map(b => ({ label: 'Réparation ' + b.label, href: '/' + b.slug + '/' })) },
   { label: 'Nos réparations', href: '/nos-reparations/', children: REPAIRS.map(r => ({ label: r.menu, href: '/' + r.slug + '/' })) },
   { label: 'Nos boutiques', href: '/boutiques/', children: SHOPS.map(s => ({ label: s.name, href: '/' + s.slug + '/' })) },
+  { label: 'Acheter', href: '/acheter-telephone-marseille/' },
   { label: 'Tarifs', href: '/tarifs/' },
   { label: 'À propos', href: '/a-propos/' },
   { label: 'Contact', href: '/contact/', cta: true }

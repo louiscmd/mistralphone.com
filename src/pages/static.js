@@ -250,6 +250,7 @@ ${heroSimple({
                 <option>Je ne sais pas — diagnostic</option>
                 <option>Tablette / iPad</option>
                 <option>MacBook / PC portable</option>
+                <option>Achat d'un téléphone</option>
               </select></div>
           </div>
           <div class="f2">
@@ -279,7 +280,7 @@ ${heroSimple({
           <div class="card-ico">${ICONS.pin}</div>
           <h3>Nos trois boutiques</h3>
           <ul class="shop-list" style="margin-top:1rem">
-            ${SHOPS.map(s => `<li>${ICONS.check}<span><a href="/${s.slug}/" style="color:#fff">${esc(s.short)}</a><br><span class="muted">${esc(s.street)}, ${s.zip} Marseille</span></span></li>`).join('')}
+            ${SHOPS.map(s => `<li>${ICONS.check}<span><a href="/${s.slug}/" style="color:var(--ink)">${esc(s.short)}</a><br><span class="muted">${esc(s.street)}, ${s.zip} Marseille</span></span></li>`).join('')}
           </ul>
         </div>
         <div class="card" style="padding:1.9rem">

@@ -6,8 +6,9 @@
   const $ = (s, r) => (r || document).querySelector(s);
   const $$ = (s, r) => Array.from((r || document).querySelectorAll(s));
   const RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const clamp = (v) => Math.min(1, Math.max(0, v));
 
-  /* ── Header + barre de progression ───────────────────────── */
+  /* ── En-tête, barre de progression, dock mobile ──────────── */
   const head = $('#head'), bar = $('#scrollbar'), dock = $('.dock');
   let lastY = 0;
   const onScroll = () => {
@@ -64,7 +65,8 @@
       const dec = (el.dataset.count.split('.')[1] || '').length;
       const suf = el.dataset.suffix || '';
       const fmt = (v) => v.toLocaleString('fr-FR', { minimumFractionDigits: dec, maximumFractionDigits: dec });
-      if (RM) { el.textContent = fmt(end) + suf; cio.unobserve(el); return; }
+      cio.unobserve(el);
+      if (RM) return;
       const t0 = performance.now(), dur = 1500;
       const tick = (t) => {
         const p = Math.min((t - t0) / dur, 1);
@@ -73,7 +75,6 @@
         if (p < 1) requestAnimationFrame(tick);
       };
       requestAnimationFrame(tick);
-      cio.unobserve(el);
     });
   }, { threshold: 0.5 });
   $$('[data-count]').forEach(el => cio.observe(el));
@@ -84,7 +85,7 @@
   }, { threshold: 0.55 });
   $$('.step').forEach(el => sio.observe(el));
 
-  /* ── Lueur qui suit la souris sur les cartes ─────────────── */
+  /* ── Souris : lueur des cartes, boutons magnétiques ──────── */
   if (!RM && matchMedia('(pointer:fine)').matches) {
     $$('.card').forEach(c => {
       c.addEventListener('pointermove', (e) => {
@@ -93,73 +94,59 @@
         c.style.setProperty('--my', ((e.clientY - r.top) / r.height) * 100 + '%');
       });
     });
-
-    /* Halo de curseur */
-    const glow = $('#cursorGlow');
-    if (glow) {
-      let gx = 0, gy = 0, tx = 0, ty = 0, on = false;
-      addEventListener('pointermove', (e) => {
-        tx = e.clientX; ty = e.clientY;
-        if (!on) { on = true; glow.style.opacity = '1'; gx = tx; gy = ty; }
-      }, { passive: true });
-      (function loop() {
-        gx += (tx - gx) * 0.12; gy += (ty - gy) * 0.12;
-        glow.style.transform = 'translate(' + gx + 'px,' + gy + 'px)';
-        requestAnimationFrame(loop);
-      })();
-    }
-
-    /* Boutons magnétiques */
     $$('.magnetic').forEach(b => {
       b.addEventListener('pointermove', (e) => {
         const r = b.getBoundingClientRect();
-        b.style.transform = 'translate(' + (e.clientX - r.left - r.width / 2) * 0.22 + 'px,' +
-          ((e.clientY - r.top - r.height / 2) * 0.22 - 3) + 'px)';
+        b.style.transform = 'translate(' + (e.clientX - r.left - r.width / 2) * 0.2 + 'px,' +
+          ((e.clientY - r.top - r.height / 2) * 0.2 - 2) + 'px)';
       });
       b.addEventListener('pointerleave', () => { b.style.transform = ''; });
     });
-
-    /* Inclinaison 3D du téléphone */
-    const phone = $('.phone');
-    if (phone) {
-      const vis = phone.closest('.hero-vis');
-      vis.addEventListener('pointermove', (e) => {
-        if (phone.classList.contains('shake')) return;
-        const r = vis.getBoundingClientRect();
-        const px = (e.clientX - r.left) / r.width - 0.5;
-        const py = (e.clientY - r.top) / r.height - 0.5;
-        phone.style.transform = 'rotateY(' + (-14 + px * 16) + 'deg) rotateX(' + (6 - py * 14) + 'deg) rotateZ(-2deg)';
-      });
-      vis.addEventListener('pointerleave', () => { phone.style.transform = ''; });
-    }
   }
 
-  /* ── Séquence « écran cassé → réparé » ───────────────────── */
-  const phone = $('.phone');
-  if (phone && !RM) {
-    $$('.phone-cracks path', phone).forEach(p => {
-      const len = p.getTotalLength();
-      p.style.setProperty('--len', len);
-    });
-    const broken = $('.state-broken', phone);
-    const fixed = $('.state-fixed', phone);
-    const run = () => {
-      phone.classList.remove('healed');
-      phone.classList.add('cracked', 'shake');
-      broken && broken.classList.remove('hide');
-      fixed && fixed.classList.add('hide');
-      setTimeout(() => phone.classList.remove('shake'), 600);
-      setTimeout(() => {
-        phone.classList.add('healed');
-        broken && broken.classList.add('hide');
-        fixed && fixed.classList.remove('hide');
-      }, 2400);
-      setTimeout(() => { phone.classList.remove('cracked'); run(); }, 7200);
-    };
-    const pio = new IntersectionObserver((e) => {
-      if (e[0].isIntersecting) { pio.disconnect(); setTimeout(run, 700); }
-    }, { threshold: 0.4 });
-    pio.observe(phone);
+  /* ── Histoire : dépôt → atelier → vitrine ────────────────── */
+  const story = $('.story');
+  if (story) {
+    if (RM) {
+      story.classList.add('story-static');
+    } else {
+      const chaps = $$('.chap', story), dots = $$('.story-dots span', story);
+      const seg = (p, a, b) => clamp((p - a) / (b - a));
+      const ease = (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+      const headH = () => parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--head-h')) || 76;
+      let cur = -1, queued = false;
+      const update = () => {
+        queued = false;
+        const r = story.getBoundingClientRect();
+        const travel = story.offsetHeight - (innerHeight - headH());
+        const p = travel > 0 ? clamp((headH() - r.top) / travel) : 0;
+        // Chapitre 2 : le téléphone s'éclate en couches puis se réassemble
+        const e = ease(seg(p, 0.30, 0.42)) * (1 - ease(seg(p, 0.54, 0.64)));
+        const v = {
+          e,
+          fly: ease(seg(p, 0.38, 0.48)),          // la vitre fissurée s'envole
+          new: seg(p, 0.50, 0.60),                // vitre neuve
+          bat: ease(seg(p, 0.44, 0.54)),          // batterie qui se remplit
+          lit: ease(seg(p, 0.58, 0.66)),          // écran rallumé
+          lbl: seg(p, 0.36, 0.42) * (1 - seg(p, 0.52, 0.56)),
+          tk: ease(seg(p, 0.04, 0.12)) * (1 - seg(p, 0.24, 0.30)),
+          done: ease(seg(p, 0.64, 0.70)),
+          shelf: ease(seg(p, 0.70, 0.82)),        // chapitre 3 : la vitrine
+          tag: ease(seg(p, 0.80, 0.90))
+        };
+        for (const k in v) story.style.setProperty('--' + k, v[k].toFixed(4));
+        const i = p < 0.28 ? 0 : p < 0.66 ? 1 : 2;
+        if (i !== cur) {
+          cur = i;
+          chaps.forEach((c, j) => c.classList.toggle('on', j === i));
+          dots.forEach((d, j) => d.classList.toggle('on', j <= i));
+        }
+      };
+      const req = () => { if (!queued) { queued = true; requestAnimationFrame(update); } };
+      addEventListener('scroll', req, { passive: true });
+      addEventListener('resize', req);
+      update();
+    }
   }
 
   /* ── Canvas « vent Mistral » ─────────────────────────────── */
@@ -167,17 +154,17 @@
   if (cv && !RM) {
     const ctx = cv.getContext('2d');
     let w = 0, h = 0, parts = [], raf = null;
-    const COLORS = ['rgba(93,143,255,', 'rgba(249,115,22,', 'rgba(139,123,255,'];
+    const COLORS = ['rgba(31,86,224,', 'rgba(15,181,198,', 'rgba(255,106,26,'];
     const make = () => {
-      const n = Math.min(Math.round(w / 12), 110);
+      const n = Math.min(Math.round(w / 16), 80);
       parts = Array.from({ length: n }, () => ({
         x: Math.random() * w, y: Math.random() * h,
-        len: 30 + Math.random() * 150,
-        sp: 0.9 + Math.random() * 3.6,
-        a: 0.08 + Math.random() * 0.4,
-        th: Math.random() * 1.6 + 0.35,
-        c: COLORS[(Math.random() * COLORS.length) | 0],
-        curve: (Math.random() - 0.5) * 26
+        len: 40 + Math.random() * 160,
+        sp: 0.7 + Math.random() * 2.6,
+        a: 0.06 + Math.random() * 0.22,
+        th: Math.random() * 1.3 + 0.4,
+        c: COLORS[Math.random() < 0.12 ? 2 : Math.random() < 0.5 ? 1 : 0],
+        curve: (Math.random() - 0.5) * 24
       }));
     };
     const size = () => {
@@ -207,35 +194,30 @@
     };
     size();
     addEventListener('resize', size);
-    const vio = new IntersectionObserver((e) => {
+    new IntersectionObserver((e) => {
       if (e[0].isIntersecting) { if (!raf) raf = requestAnimationFrame(draw); }
       else if (raf) { cancelAnimationFrame(raf); raf = null; }
-    });
-    vio.observe(cv);
+    }).observe(cv);
   }
 
   /* ── Entrée du hero ──────────────────────────────────────── */
   const hero = $('.hero');
   if (hero) {
-    $$('.hero h1 .w').forEach((el, i) => { el.style.transitionDelay = (i * 55) + 'ms'; });
-    $$('.hero .fade-up').forEach((el, i) => { el.style.transitionDelay = (350 + i * 90) + 'ms'; });
-    // double rAF : garantit que l'état initial est peint avant la transition
+    $$('.hero h1 .w').forEach((el, i) => { el.style.transitionDelay = (i * 60) + 'ms'; });
+    $$('.hero .fade-up').forEach((el, i) => { el.style.transitionDelay = (320 + i * 80) + 'ms'; });
     requestAnimationFrame(() => requestAnimationFrame(() => hero.classList.add('go')));
   }
 
-  /* ── Filtre de recherche (tarifs / modèles) ──────────────── */
+  /* ── Filtre de modèles (tarifs) ──────────────────────────── */
   const filter = $('#modelFilter');
   if (filter) {
-    const targets = $$('[data-filter]');
     filter.addEventListener('input', () => {
       const q = filter.value.trim().toLowerCase();
-      targets.forEach(t => {
-        const hit = !q || t.getAttribute('data-filter').toLowerCase().includes(q);
-        t.style.display = hit ? '' : 'none';
+      $$('[data-filter]').forEach(t => {
+        t.style.display = !q || t.getAttribute('data-filter').toLowerCase().includes(q) ? '' : 'none';
       });
       $$('[data-filter-group]').forEach(g => {
-        const any = $$('[data-filter]', g).some(t => t.style.display !== 'none');
-        g.style.display = any ? '' : 'none';
+        g.style.display = $$('[data-filter]', g).some(t => t.style.display !== 'none') ? '' : 'none';
       });
     });
   }
@@ -248,26 +230,17 @@
       if (!form.reportValidity()) return;
       const d = Object.fromEntries(new FormData(form).entries());
       const lines = [
-        'Bonjour Mistral Phone, je souhaite reserver une reparation.',
-        '',
-        'Nom : ' + (d.nom || ''),
-        'Telephone : ' + (d.tel || ''),
-        'Email : ' + (d.email || ''),
-        'Appareil : ' + (d.appareil || ''),
-        'Reparation : ' + (d.service || ''),
-        'Boutique : ' + (d.boutique || ''),
-        'Creneau souhaite : ' + (d.creneau || ''),
-        '',
+        'Bonjour Mistral Phone, je souhaite reserver une reparation.', '',
+        'Nom : ' + (d.nom || ''), 'Telephone : ' + (d.tel || ''), 'Email : ' + (d.email || ''),
+        'Appareil : ' + (d.appareil || ''), 'Demande : ' + (d.service || ''),
+        'Boutique : ' + (d.boutique || ''), 'Creneau souhaite : ' + (d.creneau || ''), '',
         'Message : ' + (d.message || '-')
       ].join('\n');
       const ok = $('#formOk');
       if (ok) { ok.classList.add('show'); ok.scrollIntoView({ block: 'center', behavior: 'smooth' }); }
       window.location.href = 'mailto:' + form.dataset.email +
-        '?subject=' + encodeURIComponent('Reservation reparation - ' + (d.nom || 'Nouveau client')) +
+        '?subject=' + encodeURIComponent('Demande - ' + (d.nom || 'Nouveau client')) +
         '&body=' + encodeURIComponent(lines);
     });
   }
-
-  /* ── Année dynamique ─────────────────────────────────────── */
-  $$('[data-year]').forEach(el => { el.textContent = new Date().getFullYear(); });
 })();

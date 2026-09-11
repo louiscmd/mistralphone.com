@@ -1,6 +1,6 @@
 import { SITE, BRANDS, REPAIRS } from '../data.js';
 import { page, ICONS, esc } from '../layout.js';
-import { phoneVisual, brandGrid, repairGrid, uspGrid, shopsSection, stepsSection, reviewsSection, faqSection, ctaBand, statsRow } from '../ui.js';
+import { ticketVisual, brandGrid, repairGrid, uspGrid, shopsSection, stepsSection, reviewsSection, faqSection, ctaBand, statsRow } from '../ui.js';
 
 const words = (s) => s.split(' ').map(w => `<span class="w">${w}</span>`).join(' ');
 
@@ -35,7 +35,7 @@ export default function brandPage(b) {
         <div class="hero-trust-i"><b>−25 €</b><span>Bonus QualiRépar</span></div>
       </div>
     </div>
-    ${phoneVisual()}
+    ${ticketVisual({ device: b.demo, repair: 'Remplacement écran', time: b.time, price: 'Devis gratuit' })}
   </div>
 </section>
 

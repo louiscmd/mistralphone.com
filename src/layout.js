@@ -84,6 +84,10 @@ export const ICONS = {
   check: I('<path d="M4 12.5l5 5 11-11"/>'),
   chevron: I('<path d="M6 9l6 6 6-6"/>'),
   route: I('<circle cx="6" cy="19" r="3"/><circle cx="18" cy="5" r="3"/><path d="M9 19h6a4 4 0 000-8H9a4 4 0 010-8h6"/>'),
+  mobile: I('<rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M11 18h2"/>'),
+  tablet: I('<rect x="4" y="2.5" width="16" height="19" rx="2.5"/><path d="M11 18.5h2"/>'),
+  bag: I('<path d="M5 8h14l-1 13H6L5 8z"/><path d="M9 8V6a3 3 0 016 0v2"/>'),
+  sparkle: I('<path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3z"/><path d="M19 16l.7 1.8 1.8.7-1.8.7L19 21l-.7-1.8-1.8-.7 1.8-.7L19 16z"/>'),
   wind: I('<path d="M3 8h11a3 3 0 10-3-3"/><path d="M3 16h7a3 3 0 113 3"/><path d="M3 12h16a2.5 2.5 0 10-2.5-2.5"/>')
 };
 
@@ -126,7 +130,7 @@ const footer = () => `
     <div class="foot-top reveal">
       <div class="foot-brand">
         <img src="/images/logo.png" alt="Mistral Phone Marseille" width="180" height="86" loading="lazy">
-        <p>Réparation de téléphone à Marseille depuis ${SITE.since}. iPhone, Samsung, Xiaomi, Google Pixel, Huawei et toutes marques. Trois boutiques dans le 4e et le 12e arrondissement.</p>
+        <p>Réparation et vente de téléphones à Marseille depuis ${SITE.since}. iPhone, Samsung, Xiaomi, Google Pixel, Huawei et toutes marques. Trois boutiques dans le 4e et le 12e arrondissement.</p>
         <div class="foot-rate">
           <span class="stars">${ICONS.star.repeat(5)}</span>
           <strong>${String(SITE.reviewsAvg).replace('.',',')}/5</strong>
@@ -152,6 +156,7 @@ const footer = () => `
         <a href="/reparation-telephone-marseille-13004/">Réparation téléphone 13004</a>
         <a href="/reparation-telephone-marseille-13012/">Réparation téléphone 13012</a>
         <h3 class="mt">Informations</h3>
+        <a href="/acheter-telephone-marseille/">Acheter un téléphone</a>
         <a href="/tarifs/">Tarifs</a>
         <a href="/a-propos/">À propos</a>
         <a href="/contact/">Contact &amp; réservation</a>
@@ -201,7 +206,7 @@ export function page({ path, title, description, body, crumbs = [], faq = null, 
 <meta name="description" content="${esc(description)}">
 <link rel="canonical" href="${canonical}">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
-<meta name="theme-color" content="#070C1A">
+<meta name="theme-color" content="#F3F6FB">
 <meta name="geo.region" content="FR-13"><meta name="geo.placename" content="Marseille">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="${esc(SITE.name)}">
@@ -217,7 +222,7 @@ export function page({ path, title, description, body, crumbs = [], faq = null, 
 <link rel="manifest" href="/site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script>document.documentElement.className+=' js';</script>
 <link rel="stylesheet" href="/assets/style.css">
 <script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@graph': graph })}</script>
@@ -225,7 +230,6 @@ export function page({ path, title, description, body, crumbs = [], faq = null, 
 <body class="${bodyClass}">
 <a class="skip" href="#main">Aller au contenu</a>
 <div class="scroll-bar" id="scrollbar" aria-hidden="true"></div>
-<div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
 
 <header class="head" id="head">
   <div class="wrap head-in">

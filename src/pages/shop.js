@@ -41,9 +41,9 @@ export default function shopPage(s) {
       <div class="card" style="padding:1.7rem">
         <span class="shop-badge">${esc(s.badge)}</span>
         <h3 style="margin:1rem 0 1rem">Informations pratiques</h3>
-        <p class="shop-addr" style="margin-bottom:1rem">${ICONS.pin}<span><strong style="color:#fff">${esc(s.street)}</strong><br>${s.zip} Marseille<br><span class="muted">${esc(s.district)}</span></span></p>
+        <p class="shop-addr" style="margin-bottom:1rem">${ICONS.pin}<span><strong style="color:var(--ink)">${esc(s.street)}</strong><br>${s.zip} Marseille<br><span class="muted">${esc(s.district)}</span></span></p>
         <p class="shop-addr" style="margin-bottom:1rem">${ICONS.clock}<span>${esc(SITE.hours)}</span></p>
-        <p class="shop-addr" style="margin-bottom:1.2rem">${ICONS.phone}<span><a href="tel:${SITE.phoneHref}" style="color:var(--or-2)">${SITE.phone}</a></span></p>
+        <p class="shop-addr" style="margin-bottom:1.2rem">${ICONS.phone}<span><a href="tel:${SITE.phoneHref}" style="color:var(--bl)">${SITE.phone}</a></span></p>
         <div class="shop-rate" style="margin-bottom:1.2rem">${stars()}<b>${String(s.rating).replace('.', ',')}</b><span class="muted">(${s.reviews} avis)</span></div>
         <h3 style="font-size:1rem;margin-bottom:.7rem">Comment venir</h3>
         <ul class="shop-list" style="margin-bottom:1.3rem">${s.transport.map(t => `<li>${ICONS.check}<span>${esc(t)}</span></li>`).join('')}</ul>
@@ -58,7 +58,7 @@ export default function shopPage(s) {
   <div class="wrap">
     <div class="sec-head reveal"><span class="eyebrow">Nous trouver</span><h2>${esc(s.street)}, ${s.zip} Marseille</h2></div>
     <div class="reveal-s" style="border-radius:var(--r-xl);overflow:hidden;border:1px solid var(--line-2);box-shadow:var(--shadow)">
-      <iframe title="Carte — Mistral Phone ${esc(s.short)}" src="${embed}" width="100%" height="440" style="border:0;display:block;filter:invert(.92) hue-rotate(180deg) saturate(.7)" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <iframe title="Carte — Mistral Phone ${esc(s.short)}" src="${embed}" width="100%" height="440" style="border:0;display:block" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
     <div style="margin-top:1.2rem;display:flex;gap:.7rem;flex-wrap:wrap">
       <a class="btn btn-primary magnetic" href="${mapsUrl(s)}" target="_blank" rel="noopener">${ICONS.route}<span>Ouvrir dans Google Maps</span></a>

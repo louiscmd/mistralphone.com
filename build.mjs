@@ -20,6 +20,7 @@ const shopPage = (await import('./src/pages/shop.js')).default;
 const zoneMod = await import('./src/pages/zone.js');
 const hubs = await import('./src/pages/hubs.js');
 const statics = await import('./src/pages/static.js');
+const buyPage = (await import('./src/pages/buy.js')).default;
 
 function collect() {
   return [
@@ -31,6 +32,7 @@ function collect() {
     ...REPAIRS.map(repairPage),
     ...SHOPS.map(shopPage),
     ...zoneMod.ZONES.map(zoneMod.default),
+    buyPage(),
     statics.tarifs(),
     statics.apropos(),
     statics.contact(),

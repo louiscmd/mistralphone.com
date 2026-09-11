@@ -1,6 +1,6 @@
 import { SITE, BRANDS, REPAIRS, SHOPS, PRICING, PRICING_EXTRA, mapsUrl } from '../data.js';
 import { page, ICONS, esc } from '../layout.js';
-import { phoneVisual, brandGrid, repairGrid, uspGrid, shopsSection, stepsSection, reviewsSection, faqSection, ctaBand, linkCloud, statsRow, shopCard, symptomList } from '../ui.js';
+import { ticketVisual, brandGrid, repairGrid, uspGrid, shopsSection, stepsSection, reviewsSection, faqSection, ctaBand, linkCloud, statsRow, shopCard, symptomList } from '../ui.js';
 
 const words = (s) => s.split(' ').map(w => `<span class="w">${w}</span>`).join(' ');
 
@@ -15,7 +15,7 @@ const hero = ({ badges, h1a, h1b, sub, ctas, trust, visual = true }) => `
       <div class="hero-cta fade-up">${ctas}</div>
       ${trust ? `<div class="hero-trust fade-up">${trust}</div>` : ''}
     </div>
-    ${visual ? phoneVisual() : ''}
+    ${visual ? ticketVisual() : ''}
   </div>
 </section>`;
 

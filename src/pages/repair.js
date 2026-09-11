@@ -1,6 +1,6 @@
 import { SITE, BRANDS, REPAIRS } from '../data.js';
 import { page, ICONS, esc } from '../layout.js';
-import { phoneVisual, brandGrid, repairGrid, uspGrid, shopsSection, stepsSection, reviewsSection, faqSection, ctaBand, symptomList } from '../ui.js';
+import { ticketVisual, brandGrid, repairGrid, uspGrid, shopsSection, stepsSection, reviewsSection, faqSection, ctaBand, symptomList } from '../ui.js';
 
 const words = (s) => s.split(' ').map(w => `<span class="w">${w}</span>`).join(' ');
 
@@ -38,7 +38,7 @@ export default function repairPage(r) {
         <div class="hero-trust-i"><b>7j/7</b><span>ouvert</span></div>
       </div>
     </div>
-    ${phoneVisual()}
+    ${ticketVisual({ device: 'iPhone, Samsung, Xiaomi…', repair: r.label, time: r.time, price: r.from ? 'dès ' + r.from + ' €' : 'Diagnostic gratuit' })}
   </div>
 </section>
 
