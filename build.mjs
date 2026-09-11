@@ -4,7 +4,8 @@
    node build.mjs           → construit dans dist/
    node build.mjs --watch   → reconstruit à chaque modification
    ═══════════════════════════════════════════════════════════════ */
-import { mkdir, writeFile, rm, cp } from 'node:fs/promises';
+import { mkdir, writeFile, rm, cp, readFile } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
 import { existsSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -86,6 +87,14 @@ async function build() {
   await mkdir(OUT, { recursive: true });
   await cp(join(ROOT, 'public'), OUT, { recursive: true });
 
+  // Empreinte de contenu : chaque nouvelle version de CSS/JS a une URL
+  // différente, ce qui rend le cache « immutable » sûr.
+  const fingerprint = async (f) => createHash('sha1').update(await readFile(join(ROOT, 'public', f))).digest('hex').slice(0, 10);
+  const assetV = { css: await fingerprint('assets/style.css'), js: await fingerprint('assets/app.js') };
+  const bust = (html) => html
+    .replace('href="/assets/style.css"', `href="/assets/style.css?v=${assetV.css}"`)
+    .replace('src="/assets/app.js"', `src="/assets/app.js?v=${assetV.js}"`);
+
   const pages = collect();
   const seen = new Set();
   for (const p of pages) {
@@ -93,12 +102,11 @@ async function build() {
     seen.add(p.path);
     const dest = join(OUT, p.file);
     await mkdir(dirname(dest), { recursive: true });
-    await writeFile(dest, p.html, 'utf8');
+    await writeFile(dest, bust(p.html), 'utf8');
   }
 
   await writeFile(join(OUT, 'sitemap.xml'), sitemap(pages));
   await writeFile(join(OUT, 'robots.txt'), robots());
-  await writeFile(join(OUT, '_headers'), `/assets/*\n  Cache-Control: public, max-age=31536000, immutable\n/images/*\n  Cache-Control: public, max-age=31536000, immutable\n`);
 
   const bytes = pages.reduce((n, p) => n + Buffer.byteLength(p.html), 0);
   console.log(`✓ ${pages.length} pages générées dans dist/ (${(bytes / 1024).toFixed(0)} Ko HTML) en ${Date.now() - t0} ms`);
